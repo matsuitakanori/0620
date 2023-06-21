@@ -19,6 +19,7 @@ public class EmployeesController {
     if (employee != null) {
         employee.setName(updatedEmployee.getName());
         employee.setEmail(updatedEmployee.getEmail());
+        employee.setIcon(updatedEmployee.getIcon());
         return repository.save(employee);
     } else {
         throw new IllegalArgumentException("指定されたIDの従業員が見つかりません");
@@ -43,20 +44,24 @@ public class EmployeesController {
     }
 
     @PostMapping("/employees")
-    public Employees addEmployee(@RequestParam("name") String name, @RequestParam("email") String email) {
+    public Employees addEmployee(@RequestParam("name") String name, @RequestParam("email") String email,@RequestParam("icon") String icon) {
     Employees newEmployee = new Employees();
     newEmployee.setName(name);
     newEmployee.setEmail(email);
+    newEmployee.setIcon(icon);
     
     return repository.save(newEmployee);
     }
+
+    
 
     @DeleteMapping("/employees/{id}")
     public String deleteEmployee(@PathVariable("id") int id) {
         repository.deleteById(id);
         return "削除しました";
     }
-    
+
+     
 }
 
 /* 

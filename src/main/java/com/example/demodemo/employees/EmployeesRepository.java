@@ -21,14 +21,15 @@ public interface EmployeesRepository extends JpaRepository<Employees,Integer> {
     void updateUser(String name);
 
     @Modifying
-    @Transactional
-    @Query(value="update employees set name = ?2, email = ?3 where id = ?1", nativeQuery = true)
-    void updateEmployee(int id, String name, String email);
+    @Query(value="update employees set name = ?2, email = ?3, icon = ?4 where id = ?1", nativeQuery = true)
+    void updateEmployee(int id, String name, String email, String icon);
 
     @Modifying
     @Transactional
-    @Query(value="insert into employees (name, email) values (?1, ?2)", nativeQuery = true)
-     void addEmployee(String name, String email);
+    @Query(value="insert into employees (name, email,icon) values (?1, ?2, ?3)", nativeQuery = true)
+     void addEmployee(String name, String email, String icon);
+
+     
 
      Employees findById(int id);
 
